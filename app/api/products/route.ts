@@ -11,9 +11,11 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const search = request.nextUrl.searchParams.get("search");
   const url = new URL(apiUrl);
-  if (search) url.searchParams.set("search", search);
+  for (const key of ["search", "limit", "offset"] as const) {
+    const value = request.nextUrl.searchParams.get(key);
+    if (value) url.searchParams.set(key, value);
+  }
 
   try {
     const response = await fetch(url, {
