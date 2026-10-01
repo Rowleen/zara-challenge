@@ -4,12 +4,15 @@ export async function GET(request: NextRequest) {
   const apiKey = process.env.API_KEY;
   const apiUrl = process.env.API_BASE_URL;
 
-  if (!apiKey) {
-    return NextResponse.json({ message: "Missing API_KEY." }, { status: 500 });
+  if (!apiKey || !apiUrl) {
+    return NextResponse.json(
+      { message: "Missing API_KEY or API_BASE_URL." },
+      { status: 500 }
+    );
   }
 
   const search = request.nextUrl.searchParams.get("search");
-  const url = new URL(`${apiUrl}/products`);
+  const url = new URL(apiUrl);
   if (search) url.searchParams.set("search", search);
 
   try {

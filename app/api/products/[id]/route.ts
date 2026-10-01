@@ -7,8 +7,11 @@ export async function GET(
   const apiKey = process.env.API_KEY;
   const apiUrl = process.env.API_BASE_URL;
 
-  if (!apiKey) {
-    return NextResponse.json({ message: "Missing API_KEY." }, { status: 500 });
+  if (!apiKey || !apiUrl) {
+    return NextResponse.json(
+      { message: "Missing API_KEY or API_BASE_URL." },
+      { status: 500 }
+    );
   }
 
   const { id } = await params;
