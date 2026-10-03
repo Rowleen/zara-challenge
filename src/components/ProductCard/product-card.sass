@@ -1,0 +1,60 @@
+@use "@styles/variables" as *;
+
+.product-card
+  height: 100%
+  border: 1px solid $primary-color
+  background: #fff
+
+  &__link
+    display: flex
+    flex-direction: column
+    gap: 24px
+    height: 100%
+    min-height: 420px
+    padding: 16px
+    color: inherit
+    text-decoration: none
+
+    &:focus-visible
+      outline: 2px solid $primary-color
+      outline-offset: -2px
+
+  &__media
+    display: flex
+    flex: 1
+    align-items: center
+    justify-content: center
+    min-height: 260px
+    margin-bottom: 1.5rem
+
+    img
+      width: 100%
+      max-width: 220px
+      max-height: 280px
+      object-fit: contain
+
+  &__body
+    display: flex
+    flex-direction: column
+    gap: 8px
+
+  &__brand
+    font-size: 10px
+    font-weight: 300
+    line-height: 100%
+    color: $secondary-color
+    text-transform: uppercase
+
+  &__footer
+    display: flex
+    align-items: flex-end
+    justify-content: space-between
+    gap: 4px
+
+  &__name,
+  &__price
+    font-size: 12px
+    font-weight: 300
+    line-height: 100%
+    text-transform: uppercase
+    color: $primary-color
