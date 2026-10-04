@@ -27,6 +27,8 @@ export default defineConfig(({ mode }) => {
         "@services": path.resolve(rootDir, "src/services"),
         "@test": path.resolve(rootDir, "src/test"),
         "@context": path.resolve(rootDir, "src/context"),
+        "@hooks": path.resolve(rootDir, "src/hooks"),
+        "@pages": path.resolve(rootDir, "src/pages"),
       },
     },
     server: {

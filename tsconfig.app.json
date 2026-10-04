@@ -28,7 +28,9 @@
       "@lib/*": ["src/lib/*"],
       "@services/*": ["src/services/*"],
       "@test/*": ["src/test/*"],
-      "@context/*": ["src/context/*"]
+      "@context/*": ["src/context/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["src"]
