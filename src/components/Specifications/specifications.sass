@@ -1,0 +1,42 @@
+@use "@styles/variables" as *
+
+.specifications
+  margin-top: 154px
+
+  &__title
+    margin-bottom: 40px
+    font-size: 20px
+    font-weight: 300
+    text-transform: uppercase
+    color: $primary-color
+
+  &__row
+    display: grid
+    grid-template-columns: 300px 1fr
+    gap: 48px
+    padding: 16px 0
+    border-bottom: 1px solid $primary-color
+
+    &:first-child
+      border-top: 1px solid $primary-color
+
+    dt, dd
+      margin: 0
+      font-size: 12px
+      font-weight: 300
+      text-transform: uppercase
+      color: $primary-color
+
+    dd
+      text-transform: none
+
+  @media (max-width: $tablet)
+    &__row
+      grid-template-columns: 160px 1fr
+      gap: 16px
+
+  @media (max-width: $mobile)
+    &__row
+      grid-template-columns: 1fr
+      gap: 8px
+      padding: 14px 0
