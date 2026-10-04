@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
         "@styles": path.resolve(rootDir, "src/styles"),
         "@assets": path.resolve(rootDir, "src/assets"),
         "@components": path.resolve(rootDir, "src/components"),
+        "@lib": path.resolve(rootDir, "src/lib"),
       },
     },
     server: {
