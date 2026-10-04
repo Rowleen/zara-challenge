@@ -28,25 +28,29 @@ export function CartPage() {
         </ul>
       )}
 
-      <footer className="cart-page__footer">
+      <footer
+        className={
+          count === 0
+            ? "cart-page__footer is-empty"
+            : "cart-page__footer"
+        }
+      >
         <Button variant="ghost" to="/" className="cart-page__continue">
           CONTINUE SHOPPING
         </Button>
 
-        <div className="cart-page__checkout">
-          <p className="cart-page__total" aria-live="polite">
-            <span>TOTAL</span>
-            <span>{formatPrice(total)}</span>
-          </p>
+        {count > 0 ? (
+          <div className="cart-page__checkout">
+            <p className="cart-page__total" aria-live="polite">
+              <span>TOTAL</span>
+              <span>{formatPrice(total)}</span>
+            </p>
 
-          <Button
-            variant="solid"
-            disabled={count === 0}
-            className="cart-page__pay"
-          >
-            PAY
-          </Button>
-        </div>
+            <Button variant="solid" className="cart-page__pay">
+              PAY
+            </Button>
+          </div>
+        ) : null}
       </footer>
     </main>
   );

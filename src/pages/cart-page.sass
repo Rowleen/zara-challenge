@@ -65,7 +65,7 @@
     &__list
       gap: 28px
 
-    &__footer
+    &__footer:not(.is-empty)
       display: grid
       grid-template-columns: 1fr 1fr
       grid-template-areas: "total total" "continue pay"
@@ -73,21 +73,28 @@
       align-items: stretch
       padding-top: 32px
 
-    &__checkout
-      display: contents
+      .cart-page__checkout
+        display: contents
 
-    &__total
-      grid-area: total
-      justify-content: space-between
-      width: 100%
+      .cart-page__total
+        grid-area: total
+        justify-content: space-between
+        width: 100%
 
-    &__continue,
-    &__pay
-      width: 100%
-      min-width: 0
+      .cart-page__continue,
+      .cart-page__pay
+        width: 100%
+        min-width: 0
 
-    &__continue
-      grid-area: continue
+      .cart-page__continue
+        grid-area: continue
 
-    &__pay
-      grid-area: pay
+      .cart-page__pay
+        grid-area: pay
+
+    &__footer.is-empty
+      justify-content: flex-start
+
+      .cart-page__continue
+        width: 100%
+        min-width: 0
