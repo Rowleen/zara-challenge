@@ -16,7 +16,7 @@ export function StorageOptions({
   return (
     <fieldset className="storage-options">
       <legend className="storage-options__legend">
-        STORAGE. ¿HOW MUCH SPACE DO YOU NEED?
+        STORAGE. HOW MUCH SPACE DO YOU NEED?
       </legend>
 
       <div
