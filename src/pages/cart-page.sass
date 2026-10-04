@@ -1,0 +1,93 @@
+@use "@styles/variables" as *
+
+.cart-page
+  display: flex
+  flex-direction: column
+  min-height: calc(100vh - 80px)
+  padding: 32px 0 40px
+
+  &__title
+    margin: 0 0 40px
+    font-size: 32px
+    font-weight: 300
+    letter-spacing: 0.02em
+    line-height: 1.2
+    text-transform: uppercase
+    color: $primary-color
+
+  &__empty
+    margin: 0
+    font-size: 14px
+    font-weight: 300
+    color: $secondary-color
+
+  &__list
+    display: flex
+    flex-direction: column
+    gap: 40px
+    margin: 0
+    padding: 0
+    list-style: none
+
+  &__footer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 24px
+    margin-top: auto
+    padding-top: 48px
+
+  &__checkout
+    display: flex
+    align-items: center
+    gap: 80px
+
+  &__total
+    display: flex
+    align-items: center
+    font-size: 14px
+    font-weight: 400
+    text-transform: uppercase
+    color: $primary-color
+    gap: 24px
+
+  @media (max-width: $tablet)
+    &__checkout
+      gap: 56px
+
+  @media (max-width: $mobile)
+    padding: 24px 0
+
+    &__title
+      margin-bottom: 28px
+      font-size: 24px
+
+    &__list
+      gap: 28px
+
+    &__footer
+      display: grid
+      grid-template-columns: 1fr 1fr
+      grid-template-areas: "total total" "continue pay"
+      gap: 8px
+      align-items: stretch
+      padding-top: 32px
+
+    &__checkout
+      display: contents
+
+    &__total
+      grid-area: total
+      justify-content: space-between
+      width: 100%
+
+    &__continue,
+    &__pay
+      width: 100%
+      min-width: 0
+
+    &__continue
+      grid-area: continue
+
+    &__pay
+      grid-area: pay
