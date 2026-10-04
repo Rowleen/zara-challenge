@@ -40,8 +40,15 @@ export function HomePage() {
           aria-busy={isSearching}
           aria-live="polite"
         >
-          {products.length > 0 ? (
-            <ProductGrid products={products} />
+          {isSearching ? (
+            <p className="home__status" role="status">
+              Searching…
+            </p>
+          ) : products.length > 0 ? (
+            <ProductGrid
+              key={products.map((p) => p.id).join("|")}
+              products={products}
+            />
           ) : (
             <p className="home__status" role="status">
               No smartphones found.

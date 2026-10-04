@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isAbortError } from "@/lib/http/apiError";
 import { getProducts } from "@/services/products";
 import type { ProductSummary } from "@/lib/types/product";
@@ -8,6 +8,7 @@ const SEARCH_DEBOUNCE_MS = 300;
 
 export function useProductSearch(query: string) {
   const debouncedQuery = useDebouncedValue(query.trim(), SEARCH_DEBOUNCE_MS);
+  const requestIdRef = useRef(0);
   const [result, setResult] = useState<{
     query: string;
     products: ProductSummary[];
@@ -17,15 +18,17 @@ export function useProductSearch(query: string) {
   );
 
   useEffect(() => {
+    const requestId = ++requestIdRef.current;
     const controller = new AbortController();
 
     getProducts(debouncedQuery, controller.signal)
       .then((products) => {
+        if (requestId !== requestIdRef.current) return;
         setResult({ query: debouncedQuery, products });
         setError(null);
       })
       .catch((reason: unknown) => {
-        if (isAbortError(reason)) return;
+        if (requestId !== requestIdRef.current || isAbortError(reason)) return;
         setError({
           query: debouncedQuery,
           message:
@@ -41,9 +44,11 @@ export function useProductSearch(query: string) {
   const matches = result?.query === debouncedQuery;
   const errorMessage = error?.query === debouncedQuery ? error.message : null;
 
+  const products = matches && result ? result.products : [];
+
   return {
-    products: result?.products ?? [],
-    count: result?.products.length ?? 0,
+    products,
+    count: products.length,
     isLoading: !result && !errorMessage,
     isSearching: Boolean(result) && !matches && !errorMessage,
     error: errorMessage,
