@@ -41,6 +41,12 @@ export function ColorOptions({
           );
         })}
       </div>
+
+      {selected ? (
+        <p className="color-options__name" aria-live="polite">
+          {selected}
+        </p>
+      ) : null}
     </fieldset>
   );
 }
