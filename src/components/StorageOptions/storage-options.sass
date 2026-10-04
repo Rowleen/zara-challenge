@@ -1,0 +1,48 @@
+@use "@styles/variables" as *
+
+.storage-options
+  margin: 0
+  padding: 0
+  border: 0
+  min-width: 0
+
+  &__legend
+    margin-bottom: 16px
+    padding: 0
+    font-size: 14px
+    font-weight: 400
+    letter-spacing: 0.04em
+    text-transform: uppercase
+    color: $primary-color
+
+  &__list
+    display: flex
+    flex-wrap: wrap
+
+  &__option
+    position: relative
+    min-width: 95px
+    height: 65px
+    padding: 24px
+    margin-left: -1px
+    border: 1px solid $tertiary-color
+    background: $base-color
+    font-size: 14px
+    font-weight: 300
+    text-transform: uppercase
+    color: $primary-color
+    cursor: pointer
+
+    &:first-child
+      margin-left: 0
+
+    &:focus-visible
+      z-index: 2
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+
+    &.is-selected
+      z-index: 1
+      border-color: $primary-color
+      background: $primary-color
+      color: $base-color
