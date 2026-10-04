@@ -23,7 +23,7 @@ const SPEC_ROWS: {
   { label: "SCREEN REFRESH RATE", value: (p) => p.specs.screenRefreshRate },
 ];
 
-const Specifications = ({ product }: SpecificationsProps) => {
+export function Specifications({ product }: SpecificationsProps) {
   return (
     <section className="specifications" aria-labelledby="specifications-title">
       <h2 id="specifications-title" className="specifications__title">
@@ -40,6 +40,4 @@ const Specifications = ({ product }: SpecificationsProps) => {
       </dl>
     </section>
   );
-};
-
-export default Specifications;
+}
