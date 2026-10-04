@@ -1,0 +1,110 @@
+@use "@styles/variables" as *
+
+.similar-items
+  width: 100%
+  margin-top: 80px
+
+  &__title
+    margin-bottom: 40px
+    font-size: 20px
+    font-weight: 300
+    text-transform: uppercase
+    color: $primary-color
+
+  &__scroller
+    container-type: inline-size
+    width: calc(50vw + 50%)
+    max-width: none
+    overflow-x: auto
+    overflow-y: hidden
+    scroll-snap-type: x mandatory
+    -webkit-overflow-scrolling: touch
+    scrollbar-width: none
+
+    &::-webkit-scrollbar
+      display: none
+
+  &__track
+    display: flex
+    width: max-content
+    min-width: 100%
+    margin: 0
+    padding: 0
+    list-style: none
+
+  &__item
+    flex: 0 0 calc((100cqw + 1px) / 4.5)
+    width: calc((100cqw + 1px) / 4.5)
+    min-width: 0
+    margin-left: -1px
+    box-sizing: border-box
+    scroll-snap-align: start
+
+    &:first-child
+      margin-left: 0
+
+    .product-card
+      border-color: $tertiary-color
+
+      .product-card__link
+        min-height: 380px
+        padding: 16px
+
+      .product-card__media
+        min-height: 220px
+        margin-bottom: 0
+
+        img
+          max-width: 180px
+          max-height: 240px
+
+      .product-card__link:focus-visible
+        outline-color: $primary-color
+
+  &__progress
+    position: relative
+    width: calc(50vw + 50%)
+    max-width: none
+    height: 2px
+    margin-top: 24px
+    background: $tertiary-color
+
+  &__thumb
+    position: absolute
+    top: 50%
+    height: 4px
+    background: $secondary-color
+    transform: translateY(-50%)
+
+  @media (max-width: $tablet)
+    &__item
+      flex-basis: calc((100cqw + 1px) / 2.3)
+      width: calc((100cqw + 1px) / 2.3)
+
+      .product-card
+        .product-card__link
+          min-height: 360px
+
+  @media (max-width: $mobile)
+    &__title
+      font-size: 18px
+      margin-bottom: 20px
+
+    &__item
+      flex-basis: calc((100cqw + 1px) / 1.15)
+      width: calc((100cqw + 1px) / 1.15)
+
+      .product-card
+        .product-card__link
+          min-height: 340px
+          padding: 16px
+
+        .product-card__media
+          min-height: 200px
+
+          img
+            max-width: 160px
+            max-height: 220px
+
+    &__progress
+      margin-top: 20px
