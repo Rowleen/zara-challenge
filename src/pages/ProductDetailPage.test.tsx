@@ -3,9 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { toast } from "react-toastify";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { CartProvider } from "@context/CartProvider";
 import { useProduct } from "@hooks/useProduct";
+
 import { sampleProduct } from "@test/fixtures/product";
+
 import { ProductDetailPage } from "./ProductDetailPage";
 
 vi.mock("@/hooks/useProduct", () => ({
