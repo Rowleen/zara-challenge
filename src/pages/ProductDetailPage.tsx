@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { useCart } from "@/context/useCart";
 
 import { useProduct } from "@/hooks/useProduct";
 
 import { BackLink } from "@components/BackLink/BackLink";
+import { Button } from "@components/Button/Button";
 import { ColorOptions } from "@components/ColorOptions/ColorOptions";
 import { SimilarItems } from "@components/SimilarItems/SimilarItems";
 import { Specifications } from "@components/Specifications/Specifications";
@@ -16,6 +20,7 @@ import "./product-detail-page.sass";
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { product, isLoading, error } = useProduct(id);
+  const { addItem } = useCart();
   const [selectedStorage, setSelectedStorage] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
@@ -58,6 +63,21 @@ export function ProductDetailPage() {
   const imageUrl =
     selectedColorOption?.imageUrl ?? product.colorOptions[0]?.imageUrl;
 
+  const handleAddToCart = () => {
+    if (!selectedStorageOption || !selectedColorOption) return;
+
+    addItem({
+      productId: product.id,
+      brand: product.brand,
+      name: product.name,
+      storage: selectedStorageOption.capacity,
+      color: selectedColorOption.name,
+      price: selectedStorageOption.price,
+      imageUrl: selectedColorOption.imageUrl,
+    });
+    toast.success("Item added to cart");
+  };
+
   return (
     <>
       <BackLink />
@@ -98,14 +118,14 @@ export function ProductDetailPage() {
               onSelect={setSelectedColor}
             />
 
-            <button
-              type="button"
-              className="product-detail__add"
+            <Button
+              variant="solid"
+              fullWidth
               disabled={!canAdd}
-              aria-disabled={!canAdd}
+              onClick={handleAddToCart}
             >
-              AÑADIR
-            </button>
+              Add to Cart
+            </Button>
           </div>
         </section>
 
