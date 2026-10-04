@@ -1,20 +1,42 @@
-import "./header.sass";
+import { Link, useLocation } from "react-router-dom";
+
+import { useCart } from "@/context/useCart";
+
 import Logo from "@assets/logo.svg";
-import bag from "@assets/bag_icon.svg";
+import bagIcon from "@assets/bag_icon.svg";
+import bagIconFilled from "@assets/bag_icon_filled.svg";
 
-const Header = () => {
+import "./header.sass";
+
+export default function Header() {
+  const { count } = useCart();
+  const { pathname } = useLocation();
+  const hasItems = count > 0;
+  const isCartPage = pathname === "/cart";
+
   return (
-    <div className="header">
-      <div className="header__logo">
-        <img src={Logo} alt="Logo" />
-      </div>
+    <header className="header">
+      <Link to="/" className="header__logo" aria-label="Go to home">
+        <img src={Logo} alt="" />
+      </Link>
 
-      <div className="header__bag">
-        <img src={bag} alt="Bag" />
-        <span>0</span>
-      </div>
-    </div>
+      {!isCartPage ? (
+        <Link
+          to="/cart"
+          className={hasItems ? "header__bag is-filled" : "header__bag"}
+          aria-label={`Cart, ${count} items`}
+        >
+          <img
+            className="header__bag-icon"
+            src={hasItems ? bagIconFilled : bagIcon}
+            alt=""
+            width={18}
+            height={18}
+            aria-hidden="true"
+          />
+          <span aria-hidden="true">{count}</span>
+        </Link>
+      ) : null}
+    </header>
   );
-};
-
-export default Header;
+}
