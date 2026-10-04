@@ -21,9 +21,11 @@
 
   &__option
     position: relative
+    display: flex
+    align-items: center
+    justify-content: center
     min-width: 95px
     height: 65px
-    padding: 24px
     margin-left: -1px
     border: 1px solid $tertiary-color
     background: $base-color
@@ -46,3 +48,19 @@
       border-color: $primary-color
       background: $primary-color
       color: $base-color
+
+  @media (max-width: $tablet)
+    &__option
+      width: 89px
+      height: 48px
+      font-size: 12px
+
+    &__legend
+      font-size: 12px
+      margin-bottom: 12px
+
+  @media (max-width: $mobile)
+    &__option
+      width: 89px
+      height: 48px
+      font-size: 12px
