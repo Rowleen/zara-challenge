@@ -25,6 +25,7 @@ export default defineConfig(({ mode }) => {
         "@components": path.resolve(rootDir, "src/components"),
         "@lib": path.resolve(rootDir, "src/lib"),
         "@services": path.resolve(rootDir, "src/services"),
+        "@test": path.resolve(rootDir, "src/test"),
       },
     },
     server: {
