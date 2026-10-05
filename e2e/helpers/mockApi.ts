@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { catalog, productDetail } from "../fixtures/catalog";
+import { catalog, productDetailsById } from "../fixtures/catalog";
 
 export async function mockApi(page: Page) {
   await page.route("**/api/products**", async (route) => {
@@ -8,10 +8,16 @@ export async function mockApi(page: Page) {
 
     if (detailMatch) {
       const id = decodeURIComponent(detailMatch[1] ?? "");
-      const product =
-        id === productDetail.id
-          ? productDetail
-          : { ...productDetail, id, name: `Product ${id}` };
+      const product = productDetailsById[id];
+
+      if (!product) {
+        await route.fulfill({
+          status: 404,
+          contentType: "application/json",
+          body: JSON.stringify({ message: "Product not found." }),
+        });
+        return;
+      }
 
       await route.fulfill({
         status: 200,
