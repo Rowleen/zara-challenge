@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
       <CartProvider>
         <App />
       </CartProvider>
-      <ToastContainer />
+      <ToastContainer position="top-center" />
     </BrowserRouter>
   </StrictMode>,
 );
