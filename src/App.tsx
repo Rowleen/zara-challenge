@@ -1,8 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout/Layout";
-import { CartPage } from "./pages/CartPage";
-import { HomePage } from "./pages/HomePage";
-import { ProductDetailPage } from "./pages/ProductDetailPage";
+
+import { CartPage } from "@pages/CartPage/CartPage";
+import { HomePage } from "@pages/HomePage/HomePage";
+import { ProductDetailPage } from "@pages/ProductDetailPage/ProductDetailPage";
+
+import { Layout } from "@components/Layout/Layout";
 
 export default function App() {
   return (
