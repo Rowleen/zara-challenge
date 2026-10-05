@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,6 +10,7 @@ dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
+const hasDist = fs.existsSync(path.join(distDir, "index.html"));
 
 const apiKey = process.env.API_KEY;
 const apiBase = (process.env.API_BASE_URL || "")
@@ -63,11 +65,17 @@ async function proxyProductById(req, res) {
 
 app.get("/api/products", proxyProducts);
 app.get("/api/products/:id", proxyProductById);
-app.use(express.static(distDir));
-app.get("/{*splat}", (_req, res) => {
-  res.sendFile(path.join(distDir, "index.html"));
-});
+
+if (hasDist) {
+  app.use(express.static(distDir));
+  app.get("/{*splat}", (_req, res) => {
+    res.sendFile(path.join(distDir, "index.html"));
+  });
+}
 
 app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+  console.log(`BFF listening on http://localhost:${port}`);
+  if (!hasDist) {
+    console.log("No dist/ found — API only (use Vite for the SPA in dev).");
+  }
 });

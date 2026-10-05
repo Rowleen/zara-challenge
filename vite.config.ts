@@ -6,14 +6,11 @@ import { defineConfig } from "vitest/config";
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
-function normalizeApiBase(url: string) {
-  return url.replace(/\/products\/?$/, "").replace(/\/$/, "");
-}
-
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, rootDir, "");
-  const apiBase = normalizeApiBase(env.API_BASE_URL || "");
-  const apiKey = env.API_KEY;
+  const bffPort = Number(env.PORT) || 3000;
+  const bffOrigin =
+    env.VITE_DEV_BFF_URL || `http://127.0.0.1:${bffPort}`;
 
   return {
     plugins: [react()],
@@ -32,16 +29,12 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      proxy: apiBase
-        ? {
-            "/api": {
-              target: apiBase,
-              changeOrigin: true,
-              rewrite: (requestPath) => requestPath.replace(/^\/api/, ""),
-              headers: apiKey ? { "x-api-key": apiKey } : undefined,
-            },
-          }
-        : undefined,
+      proxy: {
+        "/api": {
+          target: bffOrigin,
+          changeOrigin: true,
+        },
+      },
     },
     test: {
       environment: "jsdom",
